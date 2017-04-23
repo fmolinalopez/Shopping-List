@@ -29,11 +29,13 @@ public class ShoppingListApp {
                     readProduct();
                     break;
                 case 2:
+                    readIndex();
                     break;
                 case 3:
                     showShoppingList();
                     break;
                 case 4:
+                    showTotalAmount();
                     break;
                 default:
                     break;
@@ -49,14 +51,22 @@ public class ShoppingListApp {
         }
     }
 
-    private int readIndex() {
+    private void showTotalAmount() {
+        System.out.println("Total amount: " + shoppingList.totalAmount() + "€");
+    }
+
+    private void readIndex() {
         Scanner input = new Scanner(System.in);
         int index;
 
-        System.out.println("Enter index of the product:");
-        index = input.nextInt();
+        showShoppingList();
 
-        return index;
+        do {
+            System.out.println("Enter index of the product:");
+            index = input.nextInt();
+        }while (index <= 0 || index > shoppingList.getProductsList().size());
+
+        shoppingList.removeProduct(index-1);
     }
 
     private void readProduct() {
@@ -65,11 +75,13 @@ public class ShoppingListApp {
         String name;
         double price;
 
-        System.out.println("Enter product name:");
-        name = input.nextLine();
+        do {
+            System.out.println("Enter product name:");
+            name = input.nextLine().trim().replaceAll("\\s+"," ");
+        }while (name.equals(""));
 
         System.out.println("Enter product price:");
-        price = input.nextInt();
+        price = input.nextDouble();
 
         product = new Product(name, price);
         shoppingList.addProduct( product );

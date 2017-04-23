@@ -55,7 +55,7 @@ public class Product {
      * @param price double Valor del atributo price.
      */
     public void setPrice(double price) {
-        if (this.price < 0) {
+        if (price < 0) {
             this.price = 0.0;
         } else {
             this.price = price;

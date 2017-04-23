@@ -28,21 +28,17 @@ public class ShoppingList {
     }
 
     public void removeProduct(int index) {
-        if ( correctIndex(index) ) {
-            productsList.remove(index);
-        }
+        productsList.remove(index);
     }
 
-    public boolean correctIndex(int index) {
-        if ( index < 0 && index > productsList.size() ) {
-            return true;
-        } else {
-            return false;
+    public double totalAmount() {
+        double totalAmount = 0;
+
+        for (Product product: productsList){
+            totalAmount += product.getPrice();
         }
-    }
 
-    public void totalAmount() {
-
+        return totalAmount;
     }
 
     public void pay() {
